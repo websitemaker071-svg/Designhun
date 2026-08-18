@@ -16,7 +16,7 @@ import { auth, db, googleProvider } from "./firebase.js";
 /* ============================== BRAND DATA ============================== */
 
 const CONTACT_EMAIL = "designhub370@gmail.com";
-const ADMIN_PASSCODE = "designhub370";
+const ADMIN_PASSCODE = "DESIGNHUBGUPTAJIMKTJ";
 
 // Fill these in after creating a free account at https://www.emailjs.com
 // to make new orders land in the Gmail inbox automatically. Until then,
