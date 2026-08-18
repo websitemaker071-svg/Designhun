@@ -1,0 +1,44 @@
+DESIGN HUB WEBSITE — DEPLOY KARNE KE STEPS
+============================================
+
+Ye poora project hai (single artifact.jsx nahi, real deployable website).
+Isme Firebase (Google Sign-In + orders ka database) already jud chuka hai.
+
+STEP 1 — GitHub par upload karein (no coding/command line needed)
+--------------------------------------------------------------
+1. github.com par free account banayein (agar nahi hai)
+2. "New repository" banayein, naam den jaise "design-hub-website", Public rakhein
+3. Repo ke andar "Add file" -> "Upload files" par click karein
+4. Is poore folder ke saare files aur folders (src wagera sab) drag-drop karke upload kar dein
+5. "Commit changes" dabakar save kar dein
+
+STEP 2 — Netlify se deploy karein
+--------------------------------------------------------------
+1. netlify.com par free account banayein (Google se sign in kar sakte hain)
+2. "Add new site" -> "Import an existing project" -> "Deploy with GitHub"
+3. Jo repo aapne banaya tha ("design-hub-website") usse select karein
+4. Build settings apne aap sahi aa jaani chahiye (Build command: npm run build,
+   Publish directory: dist) — agar na aaye toh yehi values daal dein
+5. "Deploy site" dabayein — 1-2 minute mein site live ho jaayegi,
+   ek address milega jaisa: random-name-123.netlify.app
+
+STEP 3 — Google Sign-In ko is naye address ke liye allow karein (zaroori!)
+--------------------------------------------------------------
+Bina is step ke Google Sign-In "unauthorized domain" error dega:
+1. Firebase Console -> Authentication -> Settings tab -> "Authorized domains"
+2. "Add domain" -> apni Netlify site ka address paste karein
+   (jaise random-name-123.netlify.app, https:// ke bina)
+3. Save
+
+STEP 4 — Security rules update karein (test mode 30 din mein expire hoti hai)
+--------------------------------------------------------------
+FIRESTORE_RULES.txt file mein diye rules ko:
+1. Firebase Console -> Firestore Database -> Rules tab mein paste karein
+2. "Publish" dabayein
+
+BAS — website ab live hai aur koi bhi visit kar sakta hai.
+
+Baad mein Netlify se hi Netlify ke settings mein apna khud ka .com domain
+bhi jod sakte hain jab chahein (Site settings -> Domain management).
+
+Koi step mein atkein toh screenshot bhej dena.

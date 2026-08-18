@@ -1,0 +1,26 @@
+Paste this in Firebase Console → Firestore Database → Rules tab → then click Publish.
+This replaces the temporary "test mode" rules (which fully open access and expire
+after 30 days) with rules that require sign-in for every read/write.
+
+-----------------------------------------------------------------------------
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    match /orders/{orderId} {
+      allow create: if request.auth != null;
+      allow read, update: if request.auth != null;
+    }
+  }
+}
+-----------------------------------------------------------------------------
+
+Note on this: any signed-in customer can technically read/update the "orders"
+collection with these rules (there's no separate "admin" role yet — the
+Business Login passcode in the app is a UI-level gate, not a database-level
+one). This is fine for a small business starting out, but if you want the
+database itself locked down to only you later, that needs an extra step
+(marking your own account as an admin in Firestore and referencing that in
+the rules) — ask Claude to set this up whenever you're ready.
